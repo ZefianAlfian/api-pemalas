@@ -1,0 +1,27 @@
+{
+  "name": "rest-api-pemalas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "*",
+    "cookie-parser": "^1.4.5",
+    "csurf": "^1.11.0",
+    "ejs": "^3.1.6",
+    "express": "*",
+    "express-rate-limit": "*",
+    "express-session": "*",
+    "form-data": "*",
+    "monk": "^7.3.4",
+    "morgan": "^1.10.0",
+    "node-fetch": "*",
+    "path": "^0.12.7"
+  }
+}
