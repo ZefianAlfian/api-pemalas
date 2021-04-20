@@ -1,14 +1,15 @@
 const { Router } = require("express");
 const expressLimit = require("express-rate-limit");
-const base64 = require("base-64");
-const validator = require("validator");
 // const expressMulter = require("multer");
 // const upload = expressMulter();
 const router = Router();
 
+const PemalasDB = require("../config/db");
 const ErrorResponse = require("../utils/responseError");
 const { responseData, responseMessage } = require("../utils/responseHandler");
 const { berapaView, tambahView } = require("../model/ViewModel");
+const { validasi } = require("../utils/validasi");
+const { tambahUser, cekUser } = require("../model/UsersModel");
 
 const createAccountLimiter = expressLimit({
   windowMs: 60 * 60 * 1000, // 1 hour window
@@ -19,30 +20,20 @@ const createAccountLimiter = expressLimit({
 });
 
 router.post("/register", async (req, res, next) => {
-  let { email, username, nomor_whatsapp, password, repeatPassword } = req.body;
-  email = email.toLowerCase();
-  username = username.toLowerCase();
-  password = password.toLowerCase();
-  repeatPassword = repeatPassword.toLowerCase();
-  if (password !== repeatPassword) {
-    next(new ErrorResponse("Passwords are not the same", 403));
+  let data = await validasi(req.body, next);
+  let result = await cekUser(data);
+  if (result != null) {
+    next(new ErrorResponse("the user already exists", 400));
     return false;
   }
-  pasword = base64.encode(password);
-  
-  if (validator.isEmpty(email) != false) {
-    next(new ErrorResponse("input email!"));
-    return false;
-  }
-  if (validator.isInt(nomor_whatsapp, { min: 13, max: 14 }) != false) {
-    next(new ErrorResponse("check your whatsapp number"));
-    return false;
-  }
-  if (validator.isMobilePhone(nomor_whatsapp) != true) {
-    next(new ErrorResponse("whatsapp number not correct"));
-    return false;
-  }
-  responseMessage(res, 200, "Successfully registered. Please check your whatsapp to verified account!");
+  await tambahUser(data);
+  req.session.isLogged = true;
+  req.session.dataUser = data;
+  responseMessage(
+    res,
+    200,
+    "Successfully registered. Please check your whatsapp to verified account!"
+  );
 });
 
 router.get("/register", async (req, res, next) => {

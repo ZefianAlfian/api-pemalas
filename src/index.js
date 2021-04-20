@@ -7,7 +7,7 @@ const express = require("express");
 const expressLimit = require("express-rate-limit");
 const expressSession = require("express-session");
 const expressCsrf = require("csurf");
-const viewsEngine = require("ejs-locals")
+const viewsEngine = require("ejs-locals");
 const logger = require("morgan");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
@@ -17,6 +17,8 @@ const { responseData, responseMessage } = require("./utils/responseHandler");
 const authRoute = require("./router/authRoute");
 const PemalasDB = require("./config/db");
 const { berapaView, tambahView } = require("./model/ViewModel");
+const { totalUser } = require("./model/UsersModel");
+const { getUserInfo } = require("./utils/values");
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -52,21 +54,25 @@ const errorHandler = (err, req, res, next) => {
 };
 
 app.get("/", async (req, res, next) => {
-  // if (!req.session.isLogged && req.session.isLogged !== true) {
-  //   res.redirect("/auth/login");
-  //   return false;
-  // }
-  // await tambahView();
+  if (!req.session.isLogged && req.session.isLogged !== true) {
+    res.redirect("/auth/login");
+    return false;
+  }
+  console.log(await getUserInfo());
+  await tambahView();
   let view = await berapaView();
   view = view.counter;
 
   let today = new Date();
   let year = today.getFullYear();
+
+  let userAll = await totalUser();
   res.render("dash", {
     title: "Home | Pemalas",
     csrfToken: req.csrfToken(),
     year: year,
     view: view,
+    userRegis: userAll,
   });
 });
 
