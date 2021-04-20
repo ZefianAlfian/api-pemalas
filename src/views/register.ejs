@@ -1,0 +1,187 @@
+<% layout('template/layoutAuth') -%>
+<div class="<%=pageAuth%>-box">
+  <div class="<%=pageAuth%>-logo">
+    <a href="/"><b>ZRapi </b><br />RestAPi Open Source</a>
+  </div>
+  <div class="<%=pageAuth%>-box-body">
+    <p class="<%=pageAuth%>-box-msg">Sign up to start your session</p>
+
+    <form action="/auth/register" method="POST" id="myform">
+      <div class="form-group has-feedback">
+        <input
+          type="email"
+          name="email"
+          id="email"
+          class="form-control"
+          placeholder="Email"
+          autofocus
+          required
+        />
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input
+          type="text"
+          name="username"
+          id="username"
+          class="form-control"
+          placeholder="Username"
+          required
+        />
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <label for="nomor_whatsapp" class="text-muted"
+        >Start with regional code number!</label
+      >
+      <div class="form-group has-feedback">
+        <input
+          type="text"
+          name="nomor_whatsapp"
+          id="nomor_whatsapp"
+          class="form-control"
+          placeholder="Whatsapp number, 62*********"
+          required
+        />
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input
+          type="password"
+          name="password"
+          id="password"
+          class="form-control form-control-user"
+          placeholder="Password"
+          required
+        />
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input
+          type="password"
+          name="repeatPassword"
+          id="repeatPassword"
+          class="form-control form-control-user"
+          placeholder="Repeat Password"
+          required
+        />
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input
+          type="checkbox"
+          id="checkbox"
+          onclick="showPW()"
+          value="Show password"
+        />
+        <label for="checkbox">Show Password</label>
+      </div>
+      <input type="hidden" name="_csrf" id="_csrf" value="<%- csrfToken %>" />
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="checkbox icheck">
+            <p>have account? <a href="/auth/login">Sign In</a></p>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <button
+            type="submit"
+            class="btn btn-primary btn-block btn-flat"
+            id="loading"
+          >
+            Sign Up
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<script type="text/javascript">
+  function showPW() {
+    var pw = document.getElementById("password");
+    if (pw.type === "password") {
+      pw.type = "text";
+    } else {
+      pw.type = "password";
+    }
+
+    var rpw = document.getElementById("repeatPassword");
+    if (rpw.type === "password") {
+      rpw.type = "text";
+    } else {
+      rpw.type = "password";
+    }
+  }
+  $(document).ready(function () {
+    $("#myform").submit(function (e) {
+      var formObj = $(this);
+      var formURL = formObj.attr("action");
+      var email = $("input[name='email']").val();
+      var username = $("input[name='username']").val();
+      var nomor_whatsapp = $("input[name='nomor_whatsapp']").val();
+      var password = $("input[name='password']").val();
+      var repeatPassword = $("input[name='repeatPassword']").val();
+      var token = $("input[type='hidden']").val();
+      var dataa = JSON.stringify({
+        email,
+        username,
+        nomor_whatsapp,
+        password,
+        repeatPassword,
+      });
+      $.ajax({
+        url: formURL,
+        type: "POST",
+        dataType: "json",
+        contentType: "application/json",
+        data: dataa,
+        headers: {
+          "Content-Type": "application/json",
+          "CSRF-Token": token,
+        },
+        cache: false,
+        processData: false,
+        beforeSend: function () {
+          $("button").attr("disabled", "disabled");
+          $("input").attr("disabled", "disabled");
+          $("a").attr("disabled", "disabled");
+          $("#loading").html(
+            '<i class="fas fa-spinner fa-spin"></i> Loading...'
+          );
+        },
+        success: function (data, textStatus, jqXHR) {
+          console.log(data);
+          if (data.success == true) {
+            Swal.fire({
+              icon: "info",
+              showCloseButton: true,
+              text: data.message,
+              footer: "<a href>-Rizqi a.k.a ZefianAlfian</a>",
+            });
+            $("#loading").html("Sign Up");
+            $("button").removeAttr("disabled", "disabled");
+            $("a").removeAttr("disabled", "disabled");
+            $("input").removeAttr("disabled", "disabled");
+          } else {
+            Swal.fire({
+              icon: "info",
+              text: "Some Error",
+              footer: "Contact<a href='//wa.me/6289630171792'>admin</a>",
+            });
+          }
+        },
+        error: function (jqXHR, textStatus, err) {
+          var errornya = jqXHR.responseJSON.message;
+          Swal.fire({
+            icon: "error",
+            text: errornya,
+          });
+          $("#loading").html("Sign Up");
+          $("button").removeAttr("disabled", "disabled");
+          $("a").removeAttr("disabled", "disabled");
+          $("input").removeAttr("disabled", "disabled");
+        },
+      });
+      e.preventDefault();
+    });
+  });
+</script>

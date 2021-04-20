@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%-title%></title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="csrf-token" content="<%- csrfToken %>">
+    <meta
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+      name="viewport"
+    />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://api-pemalas.herokuapp.com" />
+    <meta property="og:title" content="<%-title%>" />
+    <meta property="og:description" content="API Pemalas" />
+    <meta property="og:image" content="" />
+    <meta property="og:site_name" content="PublicRestAPi" />
+    <meta property="twitter:card" content="summary" />
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
+      />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+      <link rel="stylesheet" href="/dist/css/skins/_all-skins.min.css" />
+      <link rel="stylesheet" href="/dist/css/AdminLTE.min.css" />
+      <link rel="stylesheet" href="/dist/css/AdminLTE.min.css" />
+      <link rel="stylesheet" href="/plugins/iCheck/square/blue.css" />
+      <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" />
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+    <style>
+      ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #aaa;
+        border-radius: 999px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #4091d4;
+      }
+    </style>
+    <style>
+      .social___ ul li {
+        display: inline;
+        margin-right: 10px;
+      }
+      .social___ ul li a {
+        background-color: #6a92ff;
+        border-radius: 50%;
+        padding: 3px;
+      }
+      .social___ ul li a i {
+        color: white;
+      }
+    </style>
+  </head>
+  <body class="hold-transition <%=pageAuth%>-page">
+      <%- body -%>
+      <div class="control-sidebar-bg"></div>
+    </div>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="/plugins/fastclick/fastclick.min.js"></script>
+    <script src="/dist/js/app.min.js"></script>
+    <script src="/dist/js/demo.js"></script>
+</body>
+</html>

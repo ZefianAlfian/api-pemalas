@@ -1,0 +1,63 @@
+<% layout('template/layout') -%>
+<% block('content_header', `<section class="content-header">
+    <div class="row">
+      <div class="col-xs-12">
+        <ol class="breadcrumb">
+          <li>
+            <a href="http://api-pemalas.herokuapp.com"
+              ><i class="fa fa-home"></i> Home</a
+            >
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>`) -%>
+  <div class="col-lg-6">
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title" name="title">Information</h3>
+      </div>
+      <div class="box-body"><p>APi Ini Free.</p></div>
+      <div class="box-body">
+        <p>
+          Karena APi ini free apa salahnya kalian subscribe/follow
+          sosial media saya
+        </p>
+      </div>
+      <div class="box-footer social___">
+        <ul style="list-style-type: none">
+          <li>
+            <a href="//www.youtube.com/channel/UC83gyyw8sO7jKuwh13D1zdw"
+              ><i class="fa fa-youtube fa-fw"></i
+            ></a>
+          </li>
+          <li>
+            <a href="//facebook.com/zefian.zefian.98"
+              ><i class="fa fa-facebook fa-fw"></i
+            ></a>
+          </li>
+          <li>
+            <a href="//instagram.com/zefianalfian"
+              ><i class="fa fa-instagram fa-fw"></i
+            ></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-xs-12">
+    <!-- small box -->
+    <div class="small-box bg-red">
+      <div class="inner">
+        <h3><%= view %></h3>
+        <p>Visitors</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-pie-graph"></i>
+      </div>
+      <a href="#" class="small-box-footer">
+        More info <i class="fa fa-arrow-circle-right"></i>
+      </a>
+    </div>
+  </div>
+  <!-- ./col -->

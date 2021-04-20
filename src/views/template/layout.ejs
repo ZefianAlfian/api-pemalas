@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%-title%></title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+      name="viewport"
+    />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://api-pemalas.herokuapp.com" />
+    <meta property="og:title" content="<%-title%>" />
+    <meta property="og:description" content="API Pemalas" />
+    <meta property="og:image" content="" />
+    <meta property="og:site_name" content="PublicRestAPi" />
+    <meta property="twitter:card" content="summary" />
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
+    />
+    <link rel="stylesheet" href="/dist/css/skins/_all-skins.min.css" />
+    <link rel="stylesheet" href="/dist/css/AdminLTE.min.css" />
+    <link rel="stylesheet" href="/dist/css/AdminLTE.min.css" />
+    <link rel="stylesheet" href="/plugins/iCheck/square/blue.css" />
+    <style>
+      ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #aaa;
+        border-radius: 999px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #4091d4;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+      .social___ ul li {
+        display: inline;
+        margin-right: 10px;
+      }
+      .social___ ul li a {
+        background-color: #6a92ff;
+        border-radius: 50%;
+        padding: 3px;
+      }
+      .social___ ul li a i {
+        color: white;
+      }
+    </style>
+  </head>
+  <body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+      <header class="main-header">
+        <a href="#!" class="logo">
+          <span class="logo-mini"><b>ZR</b></span>
+          <span class="logo-lg"><b>APIs Pemalas</b></span>
+        </a>
+        <nav class="navbar navbar-static-top" role="navigation">
+          <a
+            href="#"
+            class="sidebar-toggle"
+            data-toggle="offcanvas"
+            role="button"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span> <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <li class="">
+                <a href="/auth/login"> <i class="fa fa-sign-in"></i> </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <%- partial("../partials/nav") %>
+      <div class="content-wrapper">
+        <%-blocks.content_header%>
+        <section class="content">
+          <div class="container">
+            <div class="row"><%-body -%></div>
+          </div>
+        </section>
+      </div>
+      <footer class="main-footer text-center">
+        <strong
+          >Copyright &copy; 2021-<%- year %> <a
+            target="blank"
+            href="//t.me/zrapiofc"
+            >ZefianAlfian</a
+          >.</strong
+        >
+      </footer>
+      <div class="control-sidebar-bg"></div>
+    </div>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="/plugins/fastclick/fastclick.min.js"></script>
+    <script src="/dist/js/app.min.js"></script>
+    <script src="/dist/js/demo.js"></script>
+  </body>
+</html>
