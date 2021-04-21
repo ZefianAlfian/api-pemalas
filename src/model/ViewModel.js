@@ -1,4 +1,5 @@
 const PemalasDB = require("../config/db");
+const { getUserInfo } = require("../utils/values");
 
 async function berapaView() {
   let v = await PemalasDB.findOne({ _id: "607bdc01616fe325c421225c" });
@@ -11,11 +12,15 @@ exports.berapaView = async function () {
 };
 exports.tambahView = async function () {
   let v = await berapaView();
-  v = v.counter;
-  v = v + 1;
+  let vv = v.list.length + 1;
+  let arr = v.list;
+  let uInfo = await getUserInfo();
+  let ip = uInfo.ip
+  if (arr.includes(ip)) return;
+  arr.push(ip);
   PemalasDB.findOneAndUpdate(
     { _id: "607bdc01616fe325c421225c" },
-    { $set: { counter: v } },
+    { $set: { list: arr } },
     (err, res) => {
       if (err) return err;
       console.log(res);

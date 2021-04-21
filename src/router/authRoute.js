@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const { Router } = require("express");
 const expressLimit = require("express-rate-limit");
 // const expressMulter = require("multer");
@@ -10,6 +12,7 @@ const { responseData, responseMessage } = require("../utils/responseHandler");
 const { berapaView, tambahView } = require("../model/ViewModel");
 const { validasi } = require("../utils/validasi");
 const { tambahUser, cekUser } = require("../model/UsersModel");
+const { subject_email } = require("../config/values");
 
 const createAccountLimiter = expressLimit({
   windowMs: 60 * 60 * 1000, // 1 hour window
@@ -20,19 +23,15 @@ const createAccountLimiter = expressLimit({
 });
 
 router.post("/register", async (req, res, next) => {
-  let data = await validasi(req.body, next);
-  let result = await cekUser(data);
-  if (result != null) {
-    next(new ErrorResponse("the user already exists", 400));
-    return false;
-  }
+  let data = await validasi(req.body, subject_email,next);
   await tambahUser(data);
-  req.session.isLogged = true;
+  
+  req.session.isLogged = false;
   req.session.dataUser = data;
   responseMessage(
     res,
     200,
-    "Successfully registered. Please check your whatsapp to verified account!"
+    "Successfully registered. Please check your email to verified account!"
   );
 });
 
@@ -43,7 +42,7 @@ router.get("/register", async (req, res, next) => {
   }
   await tambahView();
   let view = await berapaView();
-  view = view.counter;
+  view = view.list.length;
 
   let today = new Date();
   let year = today.getFullYear();

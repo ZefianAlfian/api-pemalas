@@ -58,7 +58,6 @@ app.get("/", async (req, res, next) => {
     res.redirect("/auth/login");
     return false;
   }
-  console.log(await getUserInfo());
   await tambahView();
   let view = await berapaView();
   view = view.counter;
