@@ -1,12 +1,14 @@
+require("dotenv").config();
 const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");
 const validator = require("validator");
 const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
 const { cekUser } = require("../model/UsersModel");
 const { mail } = require("../config/email");
 const ErrorResponse = require("./responseError");
 
-module.exports.validasi = async function (body, subject, next) {
+module.exports = async function (body, subject, next) {
   let {
     email,
     username,
@@ -22,6 +24,10 @@ module.exports.validasi = async function (body, subject, next) {
   if (password !== repeatPassword) {
     next(new ErrorResponse("Passwords are not the same", 400));
     return false;
+  }
+  let cekPw = password.split("").length;
+  if (cekPw < 8) {
+    next(new ErrorResponse("Password min 8 character"));
   }
   if (!telegram.startsWith("@")) {
     next(new ErrorResponse("invalid username telegram", 400));
@@ -196,8 +202,13 @@ module.exports.validasi = async function (body, subject, next) {
                                             </tr>
                                         </table>
                                     </td>
-                                </tr>
+                                </tr    >
                             </table>
+                        </td>
+                    </tr> <!-- COPY -->
+                    <tr>
+                        <td bgcolor="#ffffff" align="left" style="padding: 0px 30px 0px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
+                            <p style="margin: 0;">this url invalid after 1 hour</p>
                         </td>
                     </tr> <!-- COPY -->
                     <tr>
@@ -250,12 +261,20 @@ module.exports.validasi = async function (body, subject, next) {
 </body>
 
 </html>`;
+  let data = {
+    email,
+    username,
+    nomor_whatsapp,
+    telegram,
+    password,
+  };
+  const token = jwt.sign(data, process.env.JWT_VERIFY, { expiresIn: "1h" });
 
   let mailOptions = {
     from: "noreplyzrapi@gmail.com",
     to: email,
     subject: subject,
-    html: html(`http://192.168.1.8:3000/verif/${crypto.randomBytes(10).toString("hex")}`),
+    html: html(`http://192.168.1.8:3000/auth/verify/${token}`),
   };
 
   mail.sendMail(mailOptions, function (error, info) {
@@ -265,14 +284,6 @@ module.exports.validasi = async function (body, subject, next) {
       console.log("Email sent: " + info.response);
     }
   });
-
-  let data = {
-    email,
-    username,
-    nomor_whatsapp,
-    telegram,
-    password,
-  };
 
   data.type = "Free";
 

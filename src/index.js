@@ -1,8 +1,3 @@
-const fetch = require("node-fetch");
-const cheerio = require("cheerio");
-const FormData = require("form-data");
-const path = require("path");
-
 const express = require("express");
 const expressLimit = require("express-rate-limit");
 const expressSession = require("express-session");
@@ -10,19 +5,15 @@ const expressCsrf = require("csurf");
 const viewsEngine = require("ejs-locals");
 const logger = require("morgan");
 const cookieParser = require("cookie-parser");
-const bodyParser = require("body-parser");
 
-const ErrorResponse = require("./utils/responseError");
-const { responseData, responseMessage } = require("./utils/responseHandler");
-const authRoute = require("./router/authRoute");
-const PemalasDB = require("./config/db");
+const path = require("path")
+const createError = require("http-errors");
+
 const { berapaView, tambahView } = require("./model/ViewModel");
 const { totalUser } = require("./model/UsersModel");
-const { getUserInfo } = require("./utils/values");
 
 const PORT = process.env.PORT || 3000;
 const app = express();
-const email = "tryaha78@gmail.com";
 
 app.engine("ejs", viewsEngine);
 app.set("views", path.join(__dirname, "views"));
@@ -33,14 +24,13 @@ app.use(logger("dev"));
 app.use(
   expressSession({
     secret: "secret",
-    resave: true,
+    resave: false,
     saveUninitialized: true,
   })
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(expressCsrf({ cookie: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 const errorHandler = (err, req, res, next) => {
@@ -53,14 +43,14 @@ const errorHandler = (err, req, res, next) => {
   });
 };
 
-app.get("/", async (req, res, next) => {
+app.get("/", expressCsrf({ cookie: true }), async (req, res, next) => {
   if (!req.session.isLogged && req.session.isLogged !== true) {
     res.redirect("/auth/login");
     return false;
   }
   await tambahView();
   let view = await berapaView();
-  view = view.counter;
+  view = view.list.length;
 
   let today = new Date();
   let year = today.getFullYear();
@@ -72,10 +62,12 @@ app.get("/", async (req, res, next) => {
     year: year,
     view: view,
     userRegis: userAll,
+    req,
   });
 });
 
-app.use("/auth", authRoute);
+app.use("/documentation", require("./router/docsRoute"));
+app.use("/auth", require("./router/authRoute"));
 app.use(errorHandler);
 app.use(function (req, res, next) {
   next(createError(404));
@@ -86,7 +78,7 @@ app.use(function (err, req, res, next) {
   res.locals.error = req.app.get("env") === "development" ? err : {};
   res.status(err.status || 500);
   // res.render("error", { email });
-  res.send("error");
+  res.render("error");
 });
 
 app.listen(PORT, () => {

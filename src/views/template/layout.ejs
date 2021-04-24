@@ -4,6 +4,7 @@
     <title><%-title%></title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="csrf-token" content="<%- csrfToken %>" />
     <meta
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
       name="viewport"
@@ -14,7 +15,7 @@
     <meta property="og:title" content="<%-title%>" />
     <meta property="og:description" content="API Pemalas" />
     <meta property="og:image" content="" />
-    <meta property="og:site_name" content="PublicRestAPi" />
+    <meta property="og:site_name" content="Rest API Pemalas" />
     <meta property="twitter:card" content="summary" />
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
     <link
@@ -81,9 +82,20 @@
           </a>
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
+              <% if (req.session.isLogged){ %>
+              <li>
+                <a href="#" data-toggle="control-sidebar"
+                  ><i class="fa fa-gears"></i
+                ></a>
+              </li>
+              <li class="">
+                <a href="/auth/logout"> <i class="fa fa-sign-out"></i> </a>
+              </li>
+              <% } else { %>
               <li class="">
                 <a href="/auth/login"> <i class="fa fa-sign-in"></i> </a>
               </li>
+              <% } %>
             </ul>
           </div>
         </nav>
@@ -97,17 +109,89 @@
           </div>
         </section>
       </div>
+
       <footer class="main-footer text-center">
         <strong
-          >Copyright &copy; 2021-<%- year %> <a
-            target="blank"
-            href="//t.me/zrapiofc"
-            >ZefianAlfian</a
-          >.</strong
+          >Copyright &copy; 2021-<%- year %>
+          <a target="blank" href="//t.me/zrapiofc">ZefianAlfian</a>.</strong
         >
       </footer>
       <div class="control-sidebar-bg"></div>
     </div>
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+          <li class="active"><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+        </ul> -->
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane active" id="control-sidebar-settings-tab">
+          <form method="post">
+            <h3 class="control-sidebar-heading">General Settings</h3>
+            <div class="form-group">
+              <div class="form-group has-feedback">
+                <label for="email">Email:</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  name="email"
+                  id="email"
+                  placeholder="<%- req.session.dataUser.email %>"
+                  value="<%- req.session.dataUser.email %>"
+                  disabled
+                />
+              </div>
+              <div class="form-group has-feedback">
+                <label for="apikey">ApiKey:</label>
+                <textarea name="apikey" id="apikey" class="form-control" cols="2" rows="2" disabled><%- req.session.dataUser.apikey %></textarea>
+              </div>
+              <div class="form-group has-feedback">
+                <label for="username">Username:</label>
+                <input
+                  type="username"
+                  class="form-control"
+                  name="username"
+                  id="username"
+                  placeholder="<%- req.session.dataUser.username %>"
+                  value="<%- req.session.dataUser.username %>"
+                  disabled
+                />
+              </div>
+              <div class="form-group has-feedback">
+                <label for="nomor_whatsapp">WhatsApp:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="nomor_whatsapp"
+                  id="nomor_whatsapp"
+                  placeholder="<%- req.session.dataUser.nomor_whatsapp %>"
+                  value="<%- req.session.dataUser.nomor_whatsapp %>"
+                  disabled
+                />
+              </div>
+              <div class="form-group has-feedback">
+                <label for="telegram">Telegram:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="telegram"
+                  id="telegram"
+                  placeholder="<%- req.session.dataUser.telegram %>"
+                  value="<%- req.session.dataUser.telegram %>"
+                  disabled
+                />
+              </div>
+              <div class="form-group has-feedback">
+                <label for="password">Password:</label>
+                <textarea name="password" id="password" class="form-control" cols="2" rows="2" disabled>Your password has been encrypted by system</textarea>
+              </div>
+            </div>
+            <!-- /.form-group -->
+          </form>
+        </div>
+        <!-- /.tab-pane -->
+      </div>
+    </aside>
+    <!-- /.control-sidebar -->
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <script src="/plugins/fastclick/fastclick.min.js"></script>

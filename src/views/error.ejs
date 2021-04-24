@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= message == "Not Found" ? message + " - Halaman Tidak Ditemukan" : message %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= error.status %></h1>
+    <h2><%= error.status !== 404 ? "Error" : message%></h2>
+    <p>"Barangsiapa yang mengerjakan kejahatan, niscaya akan diberi pembalasan dengan kejahatan itu
+      dan ia tidak mendapat pelindung dan tidak (pula) penolong baginya selain dari Allah." <br><br><b style="color:red">(QS:An-Nisaa | Ayat: 123)</b></p>
+  </body>
+</html>

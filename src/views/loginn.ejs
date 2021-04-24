@@ -1,0 +1,84 @@
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<form action="" method="post">
+  <input type="email" name="email" id="email" placeholder="email" />
+  <input type="username" name="username" id="username" placeholder="username" />
+  <input type="password" name="password" id="password" placeholder="password" />
+  <input
+    type="password"
+    name="repeatPassword"
+    id="repeatPassword"
+    placeholder="password"
+  />
+  <button type="button" onclick="myFunc()">Sign in</button>
+</form>
+
+<style>
+  .colored-toast.swal2-icon-success {
+    background-color: #a5dc86 !important;
+  }
+
+  .colored-toast.swal2-icon-error {
+    background-color: #f27474 !important;
+  }
+
+  .colored-toast.swal2-icon-warning {
+    background-color: #f8bb86 !important;
+  }
+
+  .colored-toast.swal2-icon-info {
+    background-color: #3fc3ee !important;
+  }
+
+  .colored-toast.swal2-icon-question {
+    background-color: #87adbd !important;
+  }
+
+  .colored-toast .swal2-title {
+    color: white;
+  }
+
+  .colored-toast .swal2-close {
+    color: white;
+  }
+
+  .colored-toast .swal2-content {
+    color: white;
+  }
+</style>
+<script>
+  async function myFunc() {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-right",
+      iconColor: "white",
+      text: "Berhasil register",
+      customClass: {
+        popup: "colored-toast",
+      },
+      showConfirmButton: false,
+      timer: 1500,
+      timerProgressBar: true,
+    });
+    await Toast.fire({
+      icon: "success",
+      title: "Success",
+    });
+    await Toast.fire({
+      icon: "error",
+      title: "Error",
+    });
+    await Toast.fire({
+      icon: "warning",
+      title: "Warning",
+    });
+    await Toast.fire({
+      icon: "info",
+      title: "Info",
+    });
+    await Toast.fire({
+      icon: "question",
+      title: "Question",
+    });
+  }
+</script>

@@ -15,7 +15,7 @@
     <meta property="og:title" content="<%-title%>" />
     <meta property="og:description" content="API Pemalas" />
     <meta property="og:image" content="" />
-    <meta property="og:site_name" content="PublicRestAPi" />
+    <meta property="og:site_name" content="Rest API Pemalas" />
     <meta property="twitter:card" content="summary" />
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
     <link
@@ -31,9 +31,9 @@
       <link rel="stylesheet" href="/dist/css/AdminLTE.min.css" />
       <link rel="stylesheet" href="/dist/css/AdminLTE.min.css" />
       <link rel="stylesheet" href="/plugins/iCheck/square/blue.css" />
-      <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" />
+      <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" /> -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script src="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <style>
       ::-webkit-scrollbar {
         width: 4px;
@@ -48,6 +48,39 @@
       }
       ::-webkit-scrollbar-thumb:hover {
         background: #4091d4;
+      }
+    </style>
+    <style>
+      .colored-toast.swal2-icon-success {
+        background-color: #a5dc86 !important;
+      }
+    
+      .colored-toast.swal2-icon-error {
+        background-color: #f27474 !important;
+      }
+    
+      .colored-toast.swal2-icon-warning {
+        background-color: #f8bb86 !important;
+      }
+    
+      .colored-toast.swal2-icon-info {
+        background-color: #3fc3ee !important;
+      }
+    
+      .colored-toast.swal2-icon-question {
+        background-color: #87adbd !important;
+      }
+    
+      .colored-toast .swal2-title {
+        color: white;
+      }
+    
+      .colored-toast .swal2-close {
+        color: white;
+      }
+    
+      .colored-toast .swal2-content {
+        color: white;
       }
     </style>
     <style>

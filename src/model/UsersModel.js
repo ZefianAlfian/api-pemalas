@@ -10,8 +10,16 @@ exports.cekUser = async function (data) {
   return hasil;
 };
 
+exports.cekUserLogin = async function (data) {
+  let { email, username, password } = data;
+  password = password.toLowerCase();
+  email = email.toLowerCase();
+  username = username.toLowerCase();
+  let hasil = await PemalasDB.findOne({ email, username });
+  return hasil;
+};
+
 exports.tambahUser = async function (data) {
-  data.isVerif = false;
   PemalasDB.insert(data);
 };
 

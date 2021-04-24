@@ -3,14 +3,10 @@
   <div class="<%=pageAuth%>-logo">
     <a href="/"><b>ZRapi </b><br />RestAPi Open Source</a>
   </div>
-  <div class=" <%=pageAuth%>-box-body">
+  <div class="<%=pageAuth%>-box-body">
     <p class="<%=pageAuth%>-box-msg">Sign in to start your session</p>
 
-    <div class="alert alert-primary hidden" role="alert">
-      A simple primary alert—check it out!
-    </div>
-
-    <form action="/auth/login" method="post">
+    <form action="/auth/login" method="POST" id="myform">
       <div class="form-group has-feedback">
         <input
           type="email"
@@ -18,10 +14,10 @@
           id="email"
           class="form-control"
           placeholder="Email"
+          autofocus
+          required
         />
-        <span
-          class="glyphicon glyphicon-envelope form-control-feedback"
-        ></span>
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <input
@@ -30,6 +26,7 @@
           id="username"
           class="form-control"
           placeholder="Username"
+          required
         />
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
@@ -38,10 +35,31 @@
           type="password"
           name="password"
           id="password"
-          class="form-control"
+          class="form-control form-control-user"
           placeholder="Password"
+          required
         />
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input
+          type="password"
+          name="repeatPassword"
+          id="repeatPassword"
+          class="form-control form-control-user"
+          placeholder="Repeat Password"
+          required
+        />
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input
+          type="checkbox"
+          id="checkbox"
+          onclick="showPW()"
+          value="Show password"
+        />
+        <label for="checkbox">Show Password</label>
       </div>
       <input type="hidden" name="_csrf" id="_csrf" value="<%- csrfToken %>" />
       <div class="row">
@@ -51,7 +69,11 @@
           </div>
         </div>
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">
+          <button
+            type="submit"
+            class="btn btn-primary btn-block btn-flat"
+            id="loading"
+          >
             Sign In
           </button>
         </div>
@@ -59,3 +81,106 @@
     </form>
   </div>
 </div>
+<script type="text/javascript">
+  function showPW() {
+    var pw = document.getElementById("password");
+    if (pw.type === "password") {
+      pw.type = "text";
+    } else {
+      pw.type = "password";
+    }
+
+    var rpw = document.getElementById("repeatPassword");
+    if (rpw.type === "password") {
+      rpw.type = "text";
+    } else {
+      rpw.type = "password";
+    }
+  }
+  $(document).ready(function () {
+    $("#myform").submit(function (e) {
+      var formObj = $(this);
+      var formURL = formObj.attr("action");
+      var email = $("input[name='email']").val();
+      var username = $("input[name='username']").val();
+      var password = $("input[name='password']").val();
+      var repeatPassword = $("input[name='repeatPassword']").val();
+      var token = $("input[type='hidden']").val();
+      var dataa = JSON.stringify({
+        email,
+        username,
+        password,
+        repeatPassword,
+      });
+      $.ajax({
+        url: formURL,
+        type: "POST",
+        dataType: "json",
+        contentType: "application/json",
+        data: dataa,
+        xhrFields: {
+          withCredentials: true,
+        },
+        headers: {
+          "Content-Type": "application/json",
+          "CSRF-Token": token,
+        },
+        cache: false,
+        processData: false,
+        beforeSend: function (xhr) {
+          xhr.withCredentials = true;
+          $("button").attr("disabled", "disabled");
+          $("input").attr("disabled", "disabled");
+          $("a").attr("disabled", "disabled");
+          $("#loading").html(
+            '<i class="fas fa-spinner fa-spin"></i> Loading...'
+          );
+        },
+        success: async function (data, textStatus, jqXHR) {
+          console.log(data);
+          if (data.success == true) {
+            const Toast = Swal.mixin({
+              toast: true,
+              position: "top-right",
+              iconColor: "white",
+              text: data.message,
+              customClass: {
+                popup: "colored-toast",
+              },
+              showConfirmButton: false,
+              timer: 1500,
+              timerProgressBar: true,
+            });
+            await Toast.fire({
+              icon: "success",
+              title: "Success",
+            });
+            $("#loading").html("Sign In");
+            $("button").removeAttr("disabled", "disabled");
+            $("a").removeAttr("disabled", "disabled");
+            $("input").removeAttr("disabled", "disabled");
+            $("input").val("");
+          } else {
+            Swal.fire({
+              icon: "info",
+              text: "Some Error",
+              footer: "Contact<a href='//wa.me/6289630171792'>admin</a>",
+            });
+          }
+        },
+        error: function (jqXHR, textStatus, err) {
+          var errornya = jqXHR.responseJSON.message;
+          Swal.fire({
+            icon: "error",
+            text: errornya,
+          });
+          $("#loading").html("Sign In");
+          $("button").removeAttr("disabled", "disabled");
+          $("a").removeAttr("disabled", "disabled");
+          $("input").removeAttr("disabled", "disabled");
+        },
+      });
+      e.preventDefault();
+    });
+  });
+</script>
