@@ -5,10 +5,6 @@ const expressCsrf = require("csurf");
 const router = Router();
 
 router.get("/", expressCsrf({ cookie: true }), async (req, res, next) => {
-  if (!req.session.isLogged && req.session.isLogged !== true) {
-    res.redirect("/auth/login");
-    return false;
-  }
   await tambahView();
   let view = await berapaView();
   view = view.list.length;

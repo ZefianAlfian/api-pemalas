@@ -46,17 +46,6 @@
       </div>
       <div class="form-group has-feedback">
         <input
-          type="text"
-          name="telegram"
-          id="telegram"
-          class="form-control"
-          placeholder="Telegram username, startwith @"
-          required
-        />
-        <span class="glyphicon glyphicon-user form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input
           type="password"
           name="password"
           id="password"
@@ -129,7 +118,6 @@
       var email = $("input[name='email']").val();
       var username = $("input[name='username']").val();
       var nomor_whatsapp = $("input[name='nomor_whatsapp']").val();
-      var telegram= $("input[name='telegram']").val();
       var password = $("input[name='password']").val();
       var repeatPassword = $("input[name='repeatPassword']").val();
       var token = $("input[type='hidden']").val();
@@ -137,7 +125,6 @@
         email,
         username,
         nomor_whatsapp,
-        telegram,
         password,
         repeatPassword,
       });
@@ -174,7 +161,7 @@
             $("button").removeAttr("disabled", "disabled");
             $("a").removeAttr("disabled", "disabled");
             $("input").removeAttr("disabled", "disabled");
-            $("input").val("")
+            $("input").val("");
           } else {
             Swal.fire({
               icon: "info",

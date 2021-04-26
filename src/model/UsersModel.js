@@ -5,17 +5,14 @@ exports.cekUser = async function (data) {
   let hasil = await PemalasDB.findOne({
     email,
     nomor_whatsapp,
-    telegram,
   });
   return hasil;
 };
 
 exports.cekUserLogin = async function (data) {
-  let { email, username, password } = data;
-  password = password.toLowerCase();
+  let { email } = data;
   email = email.toLowerCase();
-  username = username.toLowerCase();
-  let hasil = await PemalasDB.findOne({ email, username });
+  let hasil = await PemalasDB.findOne({ email });
   return hasil;
 };
 

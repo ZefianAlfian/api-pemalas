@@ -1,16 +1,16 @@
 const express = require("express");
-const expressLimit = require("express-rate-limit");
 const expressSession = require("express-session");
 const expressCsrf = require("csurf");
 const viewsEngine = require("ejs-locals");
 const logger = require("morgan");
 const cookieParser = require("cookie-parser");
 
-const path = require("path")
+const path = require("path");
 const createError = require("http-errors");
 
 const { berapaView, tambahView } = require("./model/ViewModel");
 const { totalUser } = require("./model/UsersModel");
+const errorHandlerMiddleware = require("./middleware/errorHandlerMiddleware");
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -33,21 +33,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-const errorHandler = (err, req, res, next) => {
-  let error = { ...err };
-  error.message = err.message;
-
-  res.status(error.statusCode || 500).json({
-    success: false,
-    message: error.message || "Server error",
-  });
-};
-
 app.get("/", expressCsrf({ cookie: true }), async (req, res, next) => {
-  if (!req.session.isLogged && req.session.isLogged !== true) {
-    res.redirect("/auth/login");
-    return false;
-  }
   await tambahView();
   let view = await berapaView();
   view = view.list.length;
@@ -68,7 +54,8 @@ app.get("/", expressCsrf({ cookie: true }), async (req, res, next) => {
 
 app.use("/documentation", require("./router/docsRoute"));
 app.use("/auth", require("./router/authRoute"));
-app.use(errorHandler);
+app.use("/api", require("./router/apiRoute"));
+app.use(errorHandlerMiddleware);
 app.use(function (req, res, next) {
   next(createError(404));
 });

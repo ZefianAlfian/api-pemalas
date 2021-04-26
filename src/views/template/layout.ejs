@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="/dist/css/AdminLTE.min.css" />
     <link rel="stylesheet" href="/dist/css/AdminLTE.min.css" />
     <link rel="stylesheet" href="/plugins/iCheck/square/blue.css" />
+    <%-stylesheets%>
     <style>
       ::-webkit-scrollbar {
         width: 4px;
@@ -118,6 +119,7 @@
       </footer>
       <div class="control-sidebar-bg"></div>
     </div>
+    <% if (req.session.isLogged){ %>
     <aside class="control-sidebar control-sidebar-dark">
       <!-- <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
           <li class="active"><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
@@ -169,14 +171,15 @@
                 />
               </div>
               <div class="form-group has-feedback">
-                <label for="telegram">Telegram:</label>
+                <label for="telegram">Limit request:</label>
+                <p>150 request / day</p>
                 <input
                   type="text"
                   class="form-control"
                   name="telegram"
                   id="telegram"
-                  placeholder="<%- req.session.dataUser.telegram %>"
-                  value="<%- req.session.dataUser.telegram %>"
+                  placeholder="<%- req.session.dataUser.limit %>"
+                  value="<%- req.session.dataUser.limit %>"
                   disabled
                 />
               </div>
@@ -191,7 +194,9 @@
         <!-- /.tab-pane -->
       </div>
     </aside>
+    <% } %>
     <!-- /.control-sidebar -->
+    <%-scripts%>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <script src="/plugins/fastclick/fastclick.min.js"></script>

@@ -7,52 +7,37 @@ const jwt = require("jsonwebtoken");
 const { cekUser } = require("../model/UsersModel");
 const { mail } = require("../config/email");
 const ErrorResponse = require("./responseError");
+const { generateApikey } = require("./values");
 
 module.exports = async function (body, subject, next) {
-  let {
-    email,
-    username,
-    nomor_whatsapp,
-    telegram,
-    password,
-    repeatPassword,
-  } = body;
+  let { email, username, nomor_whatsapp, password, repeatPassword } = body;
   email = email.toLowerCase();
   username = username.toLowerCase();
   password = password.toLowerCase();
   repeatPassword = repeatPassword.toLowerCase();
   if (password !== repeatPassword) {
-    next(new ErrorResponse("Passwords are not the same", 400));
-    return false;
+    return { status: 401, message: "Passwords are not the same" };
   }
   let cekPw = password.split("").length;
   if (cekPw < 8) {
-    next(new ErrorResponse("Password min 8 character"));
-  }
-  if (!telegram.startsWith("@")) {
-    next(new ErrorResponse("invalid username telegram", 400));
-    return false;
+    return { status: 401, message: "Password min 8 character" };
   }
 
   let salt = await bcrypt.genSalt(10);
   password = await bcrypt.hash(password, salt);
 
   if (validator.isEmpty(email) != false) {
-    next(new ErrorResponse("input email!"), 400);
-    return false;
+    return { status: 401, message: "Input email!" };
   }
-  if (validator.isInt(nomor_whatsapp, { min: 13, max: 14 }) != false) {
-    next(new ErrorResponse("check your whatsapp number"), 400);
-    return false;
+  if (validator.isInt(nomor_whatsapp, { min: 11, max: 14 }) != false) {
+    return { status: 401, message: "Check your whatsapp number" };
   }
   if (validator.isMobilePhone(nomor_whatsapp) != true) {
-    next(new ErrorResponse("whatsapp number not correct"), 400);
-    return false;
+    return { status: 401, message: "Whatsapp number not correct" };
   }
   let result = await cekUser(body);
   if (result != null) {
-    next(new ErrorResponse("the user already exists", 400));
-    return false;
+    return { status: 401, message: "The user already exists" };
   }
 
   let html = (urlVerif) => `<!DOCTYPE html>
@@ -261,12 +246,16 @@ module.exports = async function (body, subject, next) {
 </body>
 
 </html>`;
+  let apikey = generateApikey();
   let data = {
     email,
     username,
     nomor_whatsapp,
-    telegram,
     password,
+    limit: 150,
+    apikey,
+    type: "Free",
+    role: "User",
   };
   const token = jwt.sign(data, process.env.JWT_VERIFY, { expiresIn: "1h" });
 
@@ -274,7 +263,7 @@ module.exports = async function (body, subject, next) {
     from: "noreplyzrapi@gmail.com",
     to: email,
     subject: subject,
-    html: html(`http://192.168.1.8:3000/auth/verify/${token}`),
+    html: html(`http://api-pemalas.herokuapp.com/auth/verify/${token}`),
   };
 
   mail.sendMail(mailOptions, function (error, info) {
@@ -284,8 +273,6 @@ module.exports = async function (body, subject, next) {
       console.log("Email sent: " + info.response);
     }
   });
-
-  data.type = "Free";
 
   return data;
 };

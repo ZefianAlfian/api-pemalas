@@ -33,16 +33,17 @@ router.get("/verify/:id", async (req, res, next) => {
       email: decoded.email,
       username: decoded.username,
       nomor_whatsapp: decoded.nomor_whatsapp,
-      telegram: decoded.telegram,
       password: decoded.password,
+      apikey: decoded.apikey,
+      limit: decoded.limit,
+      type: decoded.type,
+      role: decoded.role,
       isVerif: true,
     };
     console.log(decoded);
     let cek = await cekUser(data);
     console.log(cek);
     if (cek == null) {
-      let apikey = generateApikey();
-      data.apikey = apikey;
       await tambahUser(data);
       responseMessage(res, 200, "Succsess Verify");
     } else {
@@ -67,6 +68,10 @@ router.post(
   async (req, res, next) => {
     let data = await validasi(req.body, subject_email, next);
 
+    if (data.status && data.status != 200) {
+      next(new ErrorResponse(data.message, data.status));
+      return false;
+    }
     req.session.isLogged = false;
     req.session.dataUser = data;
     responseMessage(
@@ -103,8 +108,13 @@ router.get(
 
 router.post("/login", expressCsrf({ cookie: true }), async (req, res, next) => {
   try {
-    await validasiLogin(req.body, req, res, next);
-  } catch (e){
+    let validasi = await validasiLogin(req.body, req, res, next);
+    if (validasi.status && validasi.status != 200){
+      next(new ErrorResponse(validasi.message, validasi.status));
+      return false;
+    }
+    responseMessage(res, 200, "Succses login")
+  } catch (e) {
     console.log(e);
     next(new ErrorResponse("internal server errror", 500));
   }
