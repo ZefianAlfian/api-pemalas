@@ -21,7 +21,7 @@ router.get(
       })
       .catch((er) => {
         console.log(er);
-        responseMessage(res, 500, "Internal server error");
+        next(new ErrorResponse("Internal server error", 500));
       });
   }
 );
