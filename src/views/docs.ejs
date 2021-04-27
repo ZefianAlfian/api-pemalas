@@ -19,19 +19,10 @@
 </section>
 `) -%> <% script('/dist/js/prism.js') -%> <% stylesheet('/dist/css/prism.css')
 -%>
-<div class="col-lg-3">
-  <ul class="list-unstyled">
-    <li>
-      <a href="#TtDownNowWm">Tiktok Download No WaterMark</a>
-    </li>
-    <li>
-      <a href="#TinyurlShortener">Tinyurl Shortener</a>
-    </li>
-  </ul>
-</div>
+<%- partial("./partials/listDocs") %>
 <div class="col-lg-9">
   <div class="row">
-    <div class="col-lg-10">
+    <!-- <div class="col-lg-10">
       <div class="">
         <h4 class="text-primary">
           <a href="#TtDownNowWm" id="TtDownNowWm">#</a
@@ -52,67 +43,14 @@
       </div>
       <p>Example Result</p>
       <pre>
-          <code class="language-json">
-           status: true,
-           result: {
-             urlNoWm: "https"
-           }
+        <code class="language-json">
+          status: true,
+          result: {
+            urlNoWm: "https"
+          }
           </code>
         </pre>
-    </div>
-    <div class="col-lg-10">
-      <div class="">
-        <h4 class="text-primary">
-          <a href="#TinyurlShortener" id="TinyurlShortener">#</a
-          ><span style="font-weight: bold">Tinyurl Shortener</span>
-        </h4>
-        <p>Perpendek URl.</p>
-        <div class="input-group">
-          <div class="input-group-btn">
-            <button type="button" class="btn btn-success">GET</button>
-          </div>
-          <input
-            type="text"
-            class="form-control"
-            value="http://api-pemalas.herokuapp.com/api/Tinyurl-shortener"
-            readonly
-          />
-        </div>
-      </div>
-      <div class="">
-        <label for="">Params</label>
-        <div class="table-responsive no-padding">
-          <table class="table table-bordered table-hover dataTable" role="grid">
-            <thead>
-              <tr role="row">
-                <th class="sorting">Field</th>
-                <th class="sorting">Type</th>
-                <th class="sorting">Required</th>
-                <th class="sorting">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr role="row" class="odd">
-                <td>long_url</td>
-                <td>string</td>
-                <td>Yes</td>
-                <td>URl yang mau di perpendek.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="">
-        <p>Example Result</p>
-        <pre>
-            <code class="language-json">
-             status: true,
-             result: {
-               url: "https"
-             }
-            </code>
-          </pre>
-      </div>
-    </div>
+    </div> -->
+    <%- partial("./allDocs/playstoreSearch") %>
   </div>
 </div>
