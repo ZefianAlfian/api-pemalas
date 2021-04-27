@@ -20,7 +20,6 @@
     "ejs": "^3.1.6",
     "ejs-locals": "^1.0.2",
     "express": "*",
-    "express-fileupload": "^1.2.1",
     "express-rate-limit": "*",
     "express-session": "*",
     "form-data": "*",
@@ -34,5 +33,8 @@
     "nodemailer": "^6.5.0",
     "path": "^0.12.7",
     "validator": "^13.5.2"
+  },
+  "devDependencies": {
+    "eslint": "*"
   }
 }
