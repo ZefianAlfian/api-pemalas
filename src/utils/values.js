@@ -6,6 +6,8 @@ exports.getUserInfo = async function(){
     return ip;
 }
 
+exports.internalError = "Internal server error, please report admin !";
+
 exports.generateApikey = function()
 {
 	let d = new Date().getTime();
