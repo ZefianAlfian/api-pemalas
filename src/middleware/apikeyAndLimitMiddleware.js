@@ -2,6 +2,12 @@ const { updateLimit, findApikey } = require("../model/ApikeyModel");
 const cekApikey = require("../utils/cekApikey");
 const ErrorResponse = require("../utils/responseError");
 
+/**
+ * Cek Apikey dan mengurangi limit
+ * @param {Object} req req dari express js
+ * @param {Object} res res dari express js
+ * @param {Object} next function dari express js
+ */
 module.exports = async function (req, res, next) {
 	let apikey = req.query.apikey;
 	if (!apikey) {

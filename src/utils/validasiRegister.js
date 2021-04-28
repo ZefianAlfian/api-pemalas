@@ -1,15 +1,18 @@
 require("dotenv").config();
 const bcrypt = require("bcryptjs");
-const nodemailer = require("nodemailer");
 const validator = require("validator");
-const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 const { cekUser } = require("../model/UsersModel");
 const { mail } = require("../config/email");
-const ErrorResponse = require("./responseError");
 const { generateApikey } = require("./values");
 
-module.exports = async function (body, subject, next) {
+/**
+ * validasi Register
+ * @param {Objext} body data user
+ * @param {String} subject subject email verification
+ * @returns object
+ */
+module.exports = async function (body, subject) {
   let { email, username, nomor_whatsapp, password, repeatPassword } = body;
   email = email.toLowerCase();
   username = username.toLowerCase();
@@ -40,6 +43,11 @@ module.exports = async function (body, subject, next) {
     return { status: 401, message: "The user already exists" };
   }
 
+  /**
+   * html
+   * @param {String} urlVerif url verificaton
+   * @returns html
+   */
   let html = (urlVerif) => `<!DOCTYPE html>
 <html>
 

@@ -3,7 +3,13 @@ const { cekUserLogin } = require("../model/UsersModel");
 const { responseMessage } = require("../utils/responseHandler");
 const ErrorResponse = require("../utils/responseError");
 
-module.exports = async function (data, req, res, next) {
+/**
+ * validasi Login / Sign In
+ * @param {Object} data data information
+ * @param {Object} req req dari express js
+ * @returns object
+ */
+module.exports = async function (data, req) {
   let cek = await cekUserLogin(data);
   if (cek == null) {
     return { status: 401, message: "User does not exist" };

@@ -1,3 +1,9 @@
+/**
+ * responseData
+ * @param {Object} response response dari express js
+ * @param {Number} statusCode status code respon
+ * @param {*} values value
+ */
 const responseData = function (response, statusCode, values) {
     var data = {
         success: true,

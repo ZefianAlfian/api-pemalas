@@ -1,5 +1,9 @@
 const fetch = require("node-fetch");
 
+/**
+ * get User / Client info
+ * @returns information client
+ */
 exports.getUserInfo = async function(){
     let ip = await fetch("https://api.myip.com/");
     ip = await ip.json();
@@ -8,6 +12,10 @@ exports.getUserInfo = async function(){
 
 exports.internalError = "Internal server error, please report admin !";
 
+/**
+ * generate uuid / apikey
+ * @returns uuid / apikey
+ */
 exports.generateApikey = function()
 {
 	let d = new Date().getTime();

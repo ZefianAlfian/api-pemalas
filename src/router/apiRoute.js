@@ -12,8 +12,8 @@ const apikeyAndLimitMiddleware = require("../middleware/apikeyAndLimitMiddleware
 const playstoreSearch = require("../../lib/search/playstoreSearch");
 const searchMiddleware = require("../middleware/searchMiddleware");
 const quoteMakerMiddleware = require("../middleware/quoteMakerMiddleware");
-const random = Math.random().toString(36).substring(7);
 
+//Searching
 router.get("/playstore-search", apikeyAndLimitMiddleware, searchMiddleware, (req, res, next) => {
 	playstoreSearch(res.locals.query)
 		.then((data) => {
@@ -25,7 +25,9 @@ router.get("/playstore-search", apikeyAndLimitMiddleware, searchMiddleware, (req
 		});
 });
 
+//Maker
 router.get("/quote-maker", apikeyAndLimitMiddleware, quoteMakerMiddleware, (req, res, next) => {
+const random = Math.random().toString(36).substring(7);
 	createQuote(res.locals.author, res.locals.quote)
 		.then((data) => {
 			fs.writeFileSync(path.join(__dirname, `../public/storage/${random}.jpeg`), data);
