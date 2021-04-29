@@ -14,7 +14,7 @@ module.exports = function (req, res, next) {
     next(new ErrorResponse("Input author", 401));
     return false;
   }
-  if (!author) {
+  if (!quote) {
     next(new ErrorResponse("Input quote", 401));
     return false;
   }

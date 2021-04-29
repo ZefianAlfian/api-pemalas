@@ -34,9 +34,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", expressCsrf({ cookie: true }), async (req, res, next) => {
-	console.log(typeof req);
-	console.log(typeof res);
-	console.log(typeof next);
 	await tambahView();
 	let view = await berapaView();
 	view = view.list.length;
