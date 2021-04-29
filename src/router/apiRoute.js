@@ -19,8 +19,6 @@ const quoteMakerMiddleware = require("../middleware/quoteMakerMiddleware");
 const apikeyAndLimitMiddleware = require("../middleware/apikeyAndLimitMiddleware");
 const gsmarenaDetail = require("../../lib/detail/gsmarenaDetail");
 
-const pathStorage = path.join(__dirname, `../public/storage`);
-
 //Searching
 router.get("/playstore-search", apikeyAndLimitMiddleware, searchMiddleware(), (req, res, next) => {
 	playstoreSearch(res.locals.query)
@@ -77,7 +75,7 @@ router.get("/quote-maker", apikeyAndLimitMiddleware, quoteMakerMiddleware, (req,
 	const random = Math.random().toString(36).substring(7);
 	createQuote(res.locals.author, res.locals.quote)
 		.then((data) => {
-			fs.writeFileSync(pathStorage + `/${random}.jpeg`, data);
+			fs.writeFileSync(path.join(__dirname, `../public/storage/${random}.jpeg`), data);
 			responseData(res, 200, `https://api-pemalas.herokuapp.com/storage/${random}.jpeg`);
 		})
 		.catch((er) => {
