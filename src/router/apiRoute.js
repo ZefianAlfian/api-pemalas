@@ -83,5 +83,4 @@ router.get("/quote-maker", apikeyAndLimitMiddleware, quoteMakerMiddleware, (req,
 			next(new ErrorResponse(internalError, 500));
 		});
 });
-
 module.exports = router;
