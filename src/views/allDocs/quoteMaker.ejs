@@ -1,0 +1,71 @@
+<div class="col-lg-10">
+	<div class="">
+		<h4 class="text-primary">
+			<a href="#quotemaker" id="quotemaker">#</a
+			><span style="font-weight: bold">Quote Maker</span>
+		</h4>
+		<p>Membuat gambar quotes.</p>
+		<div class="input-group">
+			<div class="input-group-btn">
+				<button type="button" class="btn btn-success">GET</button>
+			</div>
+			<input
+				type="text"
+				class="form-control"
+				value="http://api-pemalas.herokuapp.com/api/quote-maker/"
+			/>
+		</div>
+	</div>
+	<div class="">
+		<label for="">Params</label>
+		<div class="table-responsive no-padding">
+			<table class="table table-bordered table-hover dataTable" role="grid">
+				<thead>
+					<tr role="row">
+						<th class="sorting">Field</th>
+						<th class="sorting">Type</th>
+						<th class="sorting">Required</th>
+						<th class="sorting">Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr role="row" class="odd">
+						<td>apikey</td>
+						<td>string</td>
+						<td>Yes</td>
+						<td>your apikey</td>
+					</tr>
+					<tr role="row" class="odd">
+						<td>author</td>
+						<td>string</td>
+						<td>Yes</td>
+						<td>pembuat quotes.</td>
+					</tr>
+					<tr role="row" class="odd">
+						<td>quote</td>
+						<td>string</td>
+						<td>Yes</td>
+						<td>quotes.</td>
+					</tr>
+					<tr role="row" class="odd">
+						<td>background</td>
+						<td>url</td>
+						<td>No</td>
+						<td>custom background.</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="">
+		<p>Example Result</p>
+		<pre>
+			<code class="language-json">
+{
+  "success": true,
+  "data": "https://api-pemalas.herokuapp.com/storage/ay8ial.jpeg"
+}
+		  </code>
+		</pre>
+	</div>
+</div>

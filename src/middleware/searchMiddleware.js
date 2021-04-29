@@ -23,7 +23,7 @@ module.exports = function (options = {}) {
 				next(new ErrorResponse("Input the query you want to check in more detail", 401));
 				return false;
 			} else {
-				next(new ErrorResponse("Input query url", 401));
+				next(new ErrorResponse("Input query", 401));
 				return false;
 			}
 		}

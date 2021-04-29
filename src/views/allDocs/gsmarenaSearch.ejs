@@ -1,0 +1,105 @@
+<div class="col-lg-10">
+	<div class="">
+		<h4 class="text-primary">
+			<a href="#gsmarenasearch" id="gsmarenasearch">#</a
+			><span style="font-weight: bold">Gsmarena Search</span>
+		</h4>
+		<p>Menemukan beberapa jenis gadget.</p>
+		<div class="input-group">
+			<div class="input-group-btn">
+				<button type="button" class="btn btn-success">GET</button>
+			</div>
+			<input
+				type="text"
+				class="form-control"
+				value="http://api-pemalas.herokuapp.com/api/gsmarena-search/"
+			/>
+		</div>
+	</div>
+	<div class="">
+		<label for="">Params</label>
+		<div class="table-responsive no-padding">
+			<table class="table table-bordered table-hover dataTable" role="grid">
+				<thead>
+					<tr role="row">
+						<th class="sorting">Field</th>
+						<th class="sorting">Type</th>
+						<th class="sorting">Required</th>
+						<th class="sorting">Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr role="row" class="odd">
+						<td>apikey</td>
+						<td>string</td>
+						<td>Yes</td>
+						<td>your apikey</td>
+					</tr>
+					<tr role="row" class="odd">
+						<td>query</td>
+						<td>string</td>
+						<td>Yes</td>
+						<td>gadget yang ingin dicari.</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="">
+		<p>Example Result</p>
+		<pre>
+			<code class="language-json">
+{
+  "success": true,
+  "data": [
+    {
+      "judul": "AsusROG Phone 5",
+      "thumb": "https://fdn2.gsmarena.com/vv/bigpic/asus-rog-phone-5.jpg",
+      "link": "https://m.gsmarena.com/asus_rog_phone_5-10715.php"
+    },
+    {
+      "judul": "AsusROG Phone 5 Ultimate",
+      "thumb": "https://fdn2.gsmarena.com/vv/bigpic/asus-rog-phone-5-ultimate.jpg",
+      "link": "https://m.gsmarena.com/asus_rog_phone_5_ultimate-10785.php"
+    },
+    {
+      "judul": "AsusROG Phone 3 ZS661KS",
+      "thumb": "https://fdn2.gsmarena.com/vv/bigpic/asus-rog-phone-3-zs661ks.jpg",
+      "link": "https://m.gsmarena.com/asus_rog_phone_3_zs661ks-10296.php"
+    },
+    {
+      "judul": "AsusROG Phone 5 Pro",
+      "thumb": "https://fdn2.gsmarena.com/vv/bigpic/asus-rog-phone-5-pro.jpg",
+      "link": "https://m.gsmarena.com/asus_rog_phone_5_pro-10784.php"
+    },
+    {
+      "judul": "AsusROG Phone II ZS660KL",
+      "thumb": "https://fdn2.gsmarena.com/vv/bigpic/asus-rog-phone2.jpg",
+      "link": "https://m.gsmarena.com/asus_rog_phone_ii_zs660kl-9770.php"
+    },
+    {
+      "judul": "AsusROG Phone ZS600KL",
+      "thumb": "https://fdn2.gsmarena.com/vv/bigpic/asus-rog-phone.jpg",
+      "link": "https://m.gsmarena.com/asus_rog_phone_zs600kl-9224.php"
+    },
+    {
+      "judul": "AsusROG Phone 3 Strix",
+      "thumb": "https://fdn2.gsmarena.com/vv/bigpic/asus-rog-phone3-strix.jpg",
+      "link": "https://m.gsmarena.com/asus_rog_phone_3_strix-10328.php"
+    },
+    {
+      "judul": "RED Hydrogen One",
+      "thumb": "https://fdn2.gsmarena.com/vv/bigpic/red-hydrogen-one.jpg",
+      "link": "https://m.gsmarena.com/_red_hydrogen_one-9396.php"
+    },
+    {
+      "judul": "SamsungU960 Rogue",
+      "thumb": "https://fdn2.gsmarena.com/vv/bigpic/Samsung-U960-Rogue.jpg",
+      "link": "https://m.gsmarena.com/samsung_u960_rogue-3472.php"
+    }
+  ]
+}
+		  </code>
+		</pre>
+	</div>
+</div>

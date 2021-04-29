@@ -73,14 +73,26 @@ router.get(
 //Maker
 router.get("/quote-maker", apikeyAndLimitMiddleware, quoteMakerMiddleware, (req, res, next) => {
 	const random = Math.random().toString(36).substring(7);
-	createQuote(res.locals.author, res.locals.quote)
-		.then((data) => {
-			fs.writeFileSync(path.join(__dirname, `../public/storage/${random}.jpeg`), data);
-			responseData(res, 200, `https://api-pemalas.herokuapp.com/storage/${random}.jpeg`);
-		})
-		.catch((er) => {
-			console.log(er);
-			next(new ErrorResponse(internalError, 500));
-		});
+	if (res.locals.bg) {
+		createQuote(res.locals.author, res.locals.quote, res.locals.bg)
+			.then((data) => {
+				fs.writeFileSync(path.join(__dirname, `../public/storage/${random}.jpeg`), data);
+				responseData(res, 200, `https://api-pemalas.herokuapp.com/storage/${random}.jpeg`);
+			})
+			.catch((er) => {
+				console.log(er);
+				next(new ErrorResponse(internalError, 500));
+			});
+	} else {
+		createQuote(res.locals.author, res.locals.quote)
+			.then((data) => {
+				fs.writeFileSync(path.join(__dirname, `../public/storage/${random}.jpeg`), data);
+				responseData(res, 200, `https://api-pemalas.herokuapp.com/storage/${random}.jpeg`);
+			})
+			.catch((er) => {
+				console.log(er);
+				next(new ErrorResponse(internalError, 500));
+			});
+	}
 });
 module.exports = router;

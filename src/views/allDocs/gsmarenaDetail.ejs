@@ -1,0 +1,63 @@
+<div class="col-lg-10">
+	<div class="">
+		<h4 class="text-primary">
+			<a href="#gsmarenadetail" id="gsmarenadetail">#</a
+			><span style="font-weight: bold">Gsmarena Detail</span>
+		</h4>
+		<p>Menemukan beberapa informasi gadget.</p>
+		<div class="input-group">
+			<div class="input-group-btn">
+				<button type="button" class="btn btn-success">GET</button>
+			</div>
+			<input
+				type="text"
+				class="form-control"
+				value="http://api-pemalas.herokuapp.com/api/gsmarena-search/"
+			/>
+		</div>
+	</div>
+	<div class="">
+		<label for="">Params</label>
+		<div class="table-responsive no-padding">
+			<table class="table table-bordered table-hover dataTable" role="grid">
+				<thead>
+					<tr role="row">
+						<th class="sorting">Field</th>
+						<th class="sorting">Type</th>
+						<th class="sorting">Required</th>
+						<th class="sorting">Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr role="row" class="odd">
+						<td>apikey</td>
+						<td>string</td>
+						<td>Yes</td>
+						<td>your apikey</td>
+					</tr>
+					<tr role="row" class="odd">
+						<td>query</td>
+						<td>string | url</td>
+						<td>Yes</td>
+						<td>url gadget, hasil dari Gsmarena search.</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="">
+		<p>Example Result</p>
+		<pre>
+			<code class="language-json">
+{
+  "success": true,
+  "data": {
+  "title": "Asus ROG Phone 5 - Full phone specifications",
+  "image": "https://fdn2.gsmarena.com/vv/bigpic/asus-rog-phone-5.jpg",
+  "desk": "Network\n\nTechnology\nGSM / HSPA / LTE / 5G\n\n\n2G bands\nGSM 850 / 900 / 1800 / 1900 - SIM 1 & SIM 2\n\n3G bands\nHSDPA 800 / 850 / 900 / 1700(AWS) / 1800 / 1900 / 2100 - Version 1\n\n\n \nHSDPA 850 / 900 / 1800 / 1900 / 2100 / 1700 - Version 2, Version 3\n\n\n4G bands\n1, 2, 3, 4, 5, 7, 8, 12, 13, 17, 18, 19, 20, 25, 26, 28, 29, 30, 32, 34, 38, 39, 40, 41, 42, 48, 66, 71 - Version 1\n\n\n \n1, 2, 3, 4, 5, 7, 8, 18, 19, 20, 26, 28, 34, 38, 39, 40, 41, 42, 48 - Version 2, Version 3\n\n\n5G bands\n1, 2, 3, 5, 7, 8, 12, 20, 25, 28, 38, 40, 41, 66, 71, 77, 78, 79 SA/NSA - Version 1\n\n\n \n1, 3, 7, 8, 20, 28, 38, 41, 77, 78, 79 SA/NSA - Version 2, Version 3\n\n\nSpeed\nHSPA 42.2/5.76 Mbps, LTE-A (7CA) Cat20 1400/150 Mbps, 5G 4 Gbps DL\n\n\t\n\n\t\n\n\nLaunch\n\nAnnounced\n2021, March 10\n\nStatus\nAvailable. Released 2021, April 26\n\n\nBody\nDimensions\n172.8 x 77.3 x 10.3 mm (6.80 x 3.04 x 0.41 in)\n\nWeight\n238 g (8.40 oz)\n\n\n\nBuild\nGlass front (Gorilla Glass Victus), glass back (Gorilla Glass 3), aluminum frame\n\n\nSIM\nDual SIM (Nano-SIM, dual stand-by)\n\n RGB light panel (on the back)\nPressure sensitive zones (Gaming triggers)\n\t\n\nDisplay\nType\nAMOLED, 1B colors, 144Hz, HDR10+, 800 nits (typ), 1200 nits (peak)\n\n\nSize\n6.78 inches, 109.5 cm2 (~82.0% screen-to-body ratio)\n\n\nResolution\n1080 x 2448 pixels (~395 ppi density)\n\n\nProtection\nCorning Gorilla Glass Victus\n\n\t\t\n\nPlatform\nOS\nAndroid 11, ROG UI\n\nChipset\nQualcomm SM8350 Snapdragon 888 5G (5 nm)\n\nCPU\nOcta-core (1x2.84 GHz Kryo 680 & 3x2.42 GHz Kryo 680 & 4x1.80 GHz Kryo 680)\n\nGPU\nAdreno 660\n\n\nMemory\nCard slot\nNo\n\n\t\n\n\nInternal\n128GB 8GB RAM, 256GB 12GB RAM, 256GB 16GB RAM\n\n\t\n\n UFS 3.1\n\t\t\t\n\n\n\n\tMain Camera\n\t\tTriple\n\t64 MP, f/1.8, 26mm (wide), 1/1.73\", 0.8µm, PDAF\n13 MP, f/2.4, 11mm, 125˚ (ultrawide)\n5 MP, f/2.0, (macro)\n\t\n\t\t\n\tFeatures\n\tLED flash, HDR, panorama\n\t\n\t\t\n\tVideo\n\t8K@30fps, 4K@30/60/120fps, 1080p@30/60/120/240fps, 720p@480fps; gyro-EIS\n\t\n\t\t\n\tSelfie Camera\n\t\tSingle\n\t24 MP, f/2.5, 27mm (wide), 0.9µm\n\t\n\t\t\n\tFeatures\n\tPanorama, HDR\n\t\n\t\t\n\tVideo\n\t1080p@30fps\n\t\n\t\t\nSound\nLoudspeaker \nYes, with DTS:X stereo speakers (2 dedicated amplifiers)\n\n\t\n\t\n\n\n3.5mm jack \nYes\n\n\t\n\n 24-bit/192kHz audio\n\t\n\nComms\nWLAN\nWi-Fi 802.11 a/b/g/n/ac/6e, dual-band, Wi-Fi Direct, hotspot\n\n\nBluetooth\n5.2, A2DP, LE, aptX HD, aptX Adaptive\n\n\nGPS\nYes, with dual-band A-GPS, GLONASS, BDS, GALILEO, QZSS, GNSS\n  \n\nNFC\nYes\n\n\t\n\t\n\nRadio\nNo\n\n   \n\nUSB\nUSB Type-C 3.1 (side), USB Type-C 2.0 (bottom), accessory connector, USB On-The-Go\n\n\nFeatures\nSensors\nFingerprint (under display, optical), accelerometer, gyro, proximity, compass\n\n\n\n \t\n\n \t\n \n\t\n\nBattery\nType\nLi-Po 6000 mAh, non-removable\n\n\nCharging\nFast charging 65W, 70% in 30 min, 100% in 52 min (advertised)\nReverse charging 10W\nPower Delivery 3.0\nQuick Charge 5\n\n\n\n\n\nMisc\nColors\nPhantom Black, Storm White\n\n\n\nModels\nZS673KS, ZS673KS-1B048IN, ASUS_I005DB, ASUS_I005DA, I005DA, I005DB\n\n\n\n\nPrice\n$ 659.99 / € 1,038.12 / £ 829.99\n\n\nTests\nPerformance\n\nAnTuTu: 718864 (v8)\nGeekBench: 14536 (v4.4), 3745 (v5.1)\nGFXBench: 72fps (ES 3.1 onscreen)\n\n\nDisplay\n\nContrast ratio: Infinite (nominal)\n\n\nCamera\n\nPhoto / Video\n\n\nLoudspeaker\n\n-24.0 LUFS (Very good)\n\n\n\n\nBattery life\nEndurance rating 110h"
+  }
+}
+		  </code>
+		</pre>
+	</div>
+</div>
