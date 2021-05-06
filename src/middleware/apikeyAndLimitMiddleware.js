@@ -19,8 +19,12 @@ module.exports = async function (req, res, next) {
 		next(new ErrorResponse("invalid apikey", 406));
 		return false;
 	}
-  let liatLimit = await findApikey(apikey)
+	let liatLimit = await findApikey(apikey);
 	let kurangiLimit = liatLimit.limit - 1;
 	await updateLimit(apikey, kurangiLimit);
+	if (liatLimit.limit == 0) {
+		next(new ErrorResponse("limit 0", 406));
+		return false;
+	}
 	next();
 };
