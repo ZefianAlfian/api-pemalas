@@ -84,6 +84,10 @@ router.get(
 					next(new ErrorResponse("User private", 401));
 					return false;
 				}
+				if (data == false){
+					next(new ErrorResponse("Maybe user private or invalid url", 401));
+					return false;
+				}
 				responseData(res, 200, data);
 			})
 			.catch((err) => {
