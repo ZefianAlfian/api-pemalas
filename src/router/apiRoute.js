@@ -12,12 +12,14 @@ const ErrorResponse = require("../utils/responseError");
 //lib local
 const playstoreSearch = require("../../lib/search/playstoreSearch");
 const gsmarenaSearch = require("../../lib/search/gsmarenaSearch");
+const instagramPostDownloader = require("../../lib/downloader/instagramPostDownloader");
+const gsmarenaDetail = require("../../lib/detail/gsmarenaDetail");
 
 //Middleware
-const searchMiddleware = require("../middleware/searchMiddleware");
-const quoteMakerMiddleware = require("../middleware/quoteMakerMiddleware");
 const apikeyAndLimitMiddleware = require("../middleware/apikeyAndLimitMiddleware");
-const gsmarenaDetail = require("../../lib/detail/gsmarenaDetail");
+const quoteMakerMiddleware = require("../middleware/quoteMakerMiddleware");
+const downloaderMiddleware = require("../middleware/downloaderMiddleware");
+const searchMiddleware = require("../middleware/searchMiddleware");
 
 //Searching
 router.get("/playstore-search", apikeyAndLimitMiddleware, searchMiddleware(), (req, res, next) => {
@@ -65,6 +67,23 @@ router.get(
 			})
 			.catch((er) => {
 				console.log(er);
+				next(new ErrorResponse(internalError, 500));
+			});
+	}
+);
+
+//Downloader
+router.get(
+	"/instagram-post-download",
+	apikeyAndLimitMiddleware,
+	downloaderMiddleware(),
+	(req, res, next) => {
+		instagramPostDownloader(res.locals.q)
+			.then((data) => {
+				responseData(res, 200, data);
+			})
+			.catch((err) => {
+				console.log(err);
 				next(new ErrorResponse(internalError, 500));
 			});
 	}
