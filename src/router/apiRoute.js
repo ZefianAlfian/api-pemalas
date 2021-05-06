@@ -80,6 +80,10 @@ router.get(
 	(req, res, next) => {
 		instagramPostDownloader(res.locals.q)
 			.then((data) => {
+				if (data == "private") {
+					next(new ErrorResponse("User private", 401));
+					return false;
+				}
 				responseData(res, 200, data);
 			})
 			.catch((err) => {
