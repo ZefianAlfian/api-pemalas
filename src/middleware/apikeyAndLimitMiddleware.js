@@ -21,7 +21,9 @@ module.exports = async function (req, res, next) {
 	}
 	let liatLimit = await findApikey(apikey);
 	let kurangiLimit = liatLimit.limit - 1;
+	if (liatLimit.limit !== 0){
 	await updateLimit(apikey, kurangiLimit);
+	}
 	if (liatLimit.limit == 0) {
 		next(new ErrorResponse("limit 0", 406));
 		return false;
